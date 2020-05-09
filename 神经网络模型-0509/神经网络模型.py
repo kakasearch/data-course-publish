@@ -1,4 +1,4 @@
-int('121')#coding=utf-8
+#coding=utf-8
 '''
 Created on 2017-12-6
 
@@ -20,7 +20,7 @@ from sklearn.externals import joblib
 def getdata(name):
 	with open(name,encoding='utf-8')as f:
 		items=f.readlines()
-	data=[x[:-1].split(',')[4:] for x in items]
+	data=[x[:-1].split(',') for x in items]
 	new=[]
 	for item in data:
 		temp=[]
@@ -35,9 +35,11 @@ def getydata(name):
 	return data
 
 xdata=getdata('训练数据集-3-x.txt')
+
 ydata=getydata('训练数据集-3-y.txt')
 xdata=np.array(xdata)
 ydata=np.array(ydata)
+
 tlength=int(len(xdata)*0.8)#训练长度
 ylength=int(len(xdata)*0.64)#验证长度
 x_training_data,y_training_data = (xdata[:ylength],ydata[:ylength])
@@ -131,4 +133,24 @@ Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. 
 层数 12
 迭代次数 14
 当前损失值 0.05318675969494809
+输出激活函数 logistic'''
+##########
+'''Iteration 1, loss = 0.09705771
+Iteration 2, loss = 0.05166508
+Iteration 3, loss = 0.05594996
+Iteration 4, loss = 0.06758247
+Iteration 5, loss = 0.06496820
+Iteration 6, loss = 0.06624483
+Iteration 7, loss = 0.06631655
+Iteration 8, loss = 0.06423630
+Iteration 9, loss = 0.06511803
+Iteration 10, loss = 0.06508184
+Iteration 11, loss = 0.06439229
+Iteration 12, loss = 0.06447269
+Iteration 13, loss = 0.06500842
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+得分 0.9746634996041171
+层数 12
+迭代次数 13
+当前损失值 0.06500841814405464
 输出激活函数 logistic'''
