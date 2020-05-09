@@ -47,27 +47,28 @@ print('数据读取完毕')
 #处理格式
 ncov19=[]#date,cityCode,confirmed,suspected,cured,dead
 for item in ncov[1:]:
-	if ('' not in item) and ('境外输入' not in item):
-		temp=[item[0]]+item[-5:]
+	if ('' not in item) and ('境外输入' not in item) and ('x' not in item[4]):
+		temp=[item[0]]+item[-5:]#['2020-01-28', '130700', '1', '3', '0', '0']
 		ncov19.append(temp)
 
 #建立索引
-print(ncov19)
 getncov=list2dict(ncov19,0,1)
+city_codes=set()#城市代码集合，共421个城市
+for x in fixed:
+	city_codes=city_codes|{x[2],}
 data=[]#汇总
 for day in index[1:]:
 	for fix in fixed:
 		try:
 			yiqing= getncov[day[0]][fix[2]]
 		except:
-			continue
-		if not yiqing:
-			yiqing=['0']*4
+			if fix[2] in city_codes:
+				yiqing=['0']*4
+			else:
+				continue
 		exam=[day[0]]+fix+yiqing+day[1:]
-		print(exam)
+		#print(exam)
 		data.append(exam)
-
-
 print('数据汇总完毕')
 
 data = list2csv(data)
