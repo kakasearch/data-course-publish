@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>四川地区口罩短缺预测</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.js"></script>
+	<script src="jquery.js"></script>
+	
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 800px;height:600px;position:relative;margin-top:30px;margin-left: 25%;"></div>
+    <script type="text/javascript">
+		function getoptions(obj){
+			options=[]
+			for(var k = 0, pl = obj['date'].length; k<pl; k++ ){
+				day=obj['date'][k]
+				temp={
+			        title: {
+			        	 text: '四川地区口罩短缺预测 '+day,
+			        		        },
+			        		        tooltip: {
+			        		            trigger: 'item',
+			        		            formatter: '{b}<br/>{c} (p / km2)'
+			        		        },
+			        		        toolbox: {
+			        		            show: true,
+			        		            orient: 'vertical',
+			        		            left: 'right',
+			        		            top: 'center',
+			        		            feature: {
+			        		                dataView: {readOnly: false},
+			        		                restore: {},
+			        		                saveAsImage: {}
+			        		            }
+			        		        },
+			        		        visualMap: {
+			        		            min: 0,
+			        		            max: 1,
+			        		            text: ['短缺', '充足'],
+			        		            realtime: false,
+			        		            calculable: false,//true,
+			        		            inRange: {
+			        		                color: ['lightskyblue', 'yellow', 'orangered']
+			        		            }
+			        		        },
+				    series: [
+				        {type: 'map',
+						mapType: 'sc', // 自定义扩展图表类型
+					data: obj[day],
+						},
+				    ]
+				}
+				options.push(temp)
+			}
+			return options
+		}
+		////////////
+		function dataFormatter(obj) {
+		    for (var k = 0, pl = obj['date'].length; k<pl; k++ ) {
+				day=obj['date'][k]
+		        obj[day]=[];
+		        for (var i = 0, l = obj['citys'].length; i < l; i++) {
+					var pname=obj['citys'][i]
+		            obj[day][i] = {
+		                name: pname,
+		                value:obj["data"][pname][k],
+		            };
+		        }
+		    }
+		    return obj;
+			}
+			/////////////////
+		
+		futuredata=''
+		 $.ajax({
+		             type: "GET",
+		             url: "future.json",
+		             dataType: "json",
+		             success: function(data){
+						 futuredata=data
+						 console.log(data)
+						 
+						 futuredata= dataFormatter(futuredata)
+						 
+						 var myChart = echarts.init(document.getElementById('main'));
+						 myChart.showLoading();
+						 $.get('map/四川.json', function (geoJson) {
+						 
+						     myChart.hideLoading();
+						 
+						     echarts.registerMap('sc', geoJson);
+						 
+						     myChart.setOption(option = {
+						 		timeline: {
+						 		    axisType: 'category',
+						 		    // realtime: false,
+						 		    // loop: false,
+						 		    autoPlay: true,
+						 		    // currentIndex: 2,
+						 		    playInterval: 1000,
+						 		    // controlStyle: {
+						 		    //     position: 'left'
+						 		    // },
+						 		    data: futuredata['date'],
+						 		    label: {
+						 		        formatter : function(s) {
+						 		            return (new Date(s)).getMonth()+1+"-"+(new Date(s)).getDate();
+						 		        }
+						 		    }
+						 		},
+						 	options: getoptions(futuredata),
+						     });
+						 });
+					 },
+					 })
+		
+		
+    </script>
+</body>
+</html>

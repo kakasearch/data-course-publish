@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>2020-03-11 作业</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.min.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 800px;height:600px;position:relative;margin-top:30px;margin-left: 25%;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+  option = {
+	  
+	  backgroundColor: 'rgba(230,230,230,0.5)',
+    title: {
+        text: '四川省新型冠状病毒肺炎感染总体情况'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data: ['新增病例', '累计病例'],
+        right: '14%',
+        top: '4%'
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ["1月21日","1月22日","1月23日","1月24日","1月25日","1月26日","1月27日","1月28日","1月29日","1月30日","1月31日","2月1日","2月2日","2月3日","2月4日","2月5日","2月6日","2月7日","2月8日","2月9日","2月10日","2月11日","2月12日","2月13日","2月14日","2月15日","2月16日","2月17日","2月18日","2月19日","2月20日","2月21日","2月22日","2月23日","2月24日","2月25日","2月26日"]
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: '新增病例',
+            stack: '总量',
+            data: [2,3,10,13,16,25,21,18,34,36,30,24,23,28,19,20,23,19,23,19,12,19,15,12,7,11,14,13,6,6,5,1,0,1,2,2,3],
+        type: 'line',
+        smooth: true,
+        areaStyle: {
+            color:'red'
+        }
+        },
+        {
+            name: '累计病例',
+            stack: '总量',
+           data: [2,5,15,28,44,69,90,108,142,178,207,231,254,282,301,321,344,363,386,405,417,436,451,463,470,481,495,508,514,520,525,526,526,527,529,531,534],
+        type: 'line',
+         smooth: true
+        },
+        
+    ]
+	};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

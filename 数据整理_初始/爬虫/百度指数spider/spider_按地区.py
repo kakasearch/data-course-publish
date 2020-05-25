@@ -19,7 +19,7 @@ function decrypt(t, e) {
 '''
  
 headers = {
-    "Cookie": '''BAIDUID=3A81D0B48C49C694C499E2EDB3735465:FG=1; BIDUPSID=3A81D0B48C49C694C499E2EDB3735465; PSTM=1585910552; MCITY=-%3A; BDUSS=F6bjZjRG5zalNhVzFFSjJmekh1REQ0TWhjRHZKZHk5ay1EMGlOLTJ6dHl2cnRlRVFBQUFBJCQAAAAAAAAAAAEAAAB9FP2cZGZzc2Z5dQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHIxlF5yMZReRj; CHKFORREG=42228c0c68b667b4b6574aea103a3322; bdindexid=qmnh9d0vv4qc93g1v3o3o9het6; H_PS_PSSID=1458_31169_21080_31186_30905_31271_31217_30823_31085_26350_31164_31195; Hm_lvt_d101ea4d2a5c67dab98251f0b5de24dc=1586686783,1586770070,1586771509; delPer=0; PSINO=2; RT="sl=a&ss=k8ycsmb9&tt=b3i&bcn=https%3A%2F%2Ffclog.baidu.com%2Flog%2Fweirwood%3Ftype%3Dperf&z=1&dm=baidu.com&si=4c4zew9pf9z"; Hm_lpvt_d101ea4d2a5c67dab98251f0b5de24dc=1586779798''',
+    "Cookie": '''BAIDUID=7102680246C70691B861E9BD616EE2C8:FG=1; Hm_lvt_d101ea4d2a5c67dab98251f0b5de24dc=1590287287; Hm_lpvt_d101ea4d2a5c67dab98251f0b5de24dc=1590287290; BDUSS=lRTQld-ZFJBY2g5RWIzRUt0emdUd0dvaHlWUHo3cnNrQi12cDV-M3FGekFhUEZlRVFBQUFBJCQAAAAAAAAAAAEAAAB9FP2cZGZzc2Z5dQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDbyV7A28led; RT="sl=2&ss=kakfz5zw&tt=4o1&bcn=https%3A%2F%2Ffclog.baidu.com%2Flog%2Fweirwood%3Ftype%3Dperf&z=1&dm=baidu.com&si=qw888bh8zaj&ld=mit&ul=sfg''',
     "Referer": "http://index.baidu.com/v2/main/index.html",
 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36",
 "X-Requested-With": "XMLHttpRequest",
@@ -67,7 +67,8 @@ class BDIndex(object):
         :param key_word:
         :return:
         """
-        data_url = 'http://index.baidu.com/api/SearchApi/index?area='+area+'&word='+key_word+'&startDate='+start+'&endDate='+end
+        #http://index.baidu.com/api/SearchApi/index?area=0&word=[[%7B%22name%22:%22%E5%8F%A3%E7%BD%A9%22,%22wordType%22:1%7D]]&days=30
+        data_url = 'http://index.baidu.com/api/SearchApi/index?area='+area+'&word=[[{"name":"'+key_word+'","wordType":1}]]&days=30'
         response = self.session.get(data_url).json()
         try:
             uniq_id = self.session.get(
@@ -149,11 +150,12 @@ if __name__ == '__main__':
         #city_name = city['label']
         #area = city['value']
         area =str(pnum)
-        start = '2019-12-01'#i[0]
-        end='2020-04-01'#i[1]
+        start = '2019-05-01'#i[0]
+        end='2020-05-24'#i[1]
         key_word = '口罩'
         d = bd.get_bd_index(key_word,start,end,area)
         print(province_name)
-        with open('d:/desktop/百度指数/口罩/city_19-12-01--20-04-01/'+province_name+'.dict','w+',encoding='utf-8') as f:
-            f.write(str(d))
+        print(d)
+        #with open('d:/desktop/百度指数/口罩/city_19-12-01--20-04-01/'+province_name+'.dict','w+',encoding='utf-8') as f:
+        #    f.write(str(d))
         # time.sleep()
