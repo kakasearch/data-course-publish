@@ -23,7 +23,6 @@
 			        		        tooltip: {
 			        		            trigger: 'item',
 			        		            formatter: function(p) {
-											
 													  let str = p.name + '<br/>' + (p.value=='1'?'缺乏':'充足')
 													  return  str
 													}
@@ -80,7 +79,7 @@
 		futuredata=''
 		 $.ajax({
 		             type: "GET",
-		             url: "future.json",
+		             url: "show.json",
 		             dataType: "json",
 		             success: function(data){
 						 futuredata=data
