@@ -1,0 +1,100 @@
+@font-face {
+	font-family: myfonts;
+	src: url(../fonts/Gotham-Book.eot) format("embedded-opentype"), url(./Gotham-Book.woff) format("woff"), url(../fonts/Gotham-Book.ttf) format("truetype"), url(../fonts/Gotham-Book.svg#iconfont) format("svg");
+}
+body {
+	background: url("https://cdn.jsdelivr.net/gh/YX1900/ImageHosting/1900pic/bgg.png") no-repeat 0px 0px / 100% 100%; margin: 0px; width: 100vw; overflow: hidden;
+}
+html {
+	-ms-overflow-y: scroll;
+}
+:root {
+	-ms-overflow-x: hidden; -ms-overflow-y: auto;
+}
+:root body {
+	position: absolute;
+}
+#header {
+	background: url("https://cdn.jsdelivr.net/gh/YX1900/ImageHosting/1900pic/header.png") no-repeat 0px 0px / 100% 100%; width: 100%; height: 5%; position: relative;
+}
+#footer {
+	background: url("https://cdn.jsdelivr.net/gh/YX1900/ImageHosting/1900pic/footer.png") no-repeat 0px 0px / 100% 100%; left: 0px; height: 2%; right: 0px; bottom: 0px; position: absolute;
+}
+#tit {
+	left: 30%; top: 1%; width: 38%; color: rgb(255, 255, 255); font-family: myfonts; display: flex; position: absolute; justify-content: center; align-items: center;
+}
+#tit span {
+	font-size: 30px;
+}
+#data {
+	left: 2%; top: 50%; height: 10%; color: rgb(255, 255, 255); line-height: 170%; font-family: myfonts; position: absolute;
+}
+a {
+	color: rgb(240, 150, 148); text-decoration: none;
+}
+#tim {
+	top: 50%; height: 10%; right: 2%; color: rgb(255, 255, 255); font-family: myfonts; position: absolute;
+}
+#c1 {
+	left: 30%; top: 1%; width: 40%; height: 24%; color: rgb(255, 255, 255); position: absolute;
+}
+.num {
+	width: 25%; font-family: myfonts; font-size: 20px; margin-top: 20px; float: left; display: flex; justify-content: center; align-items: center;
+}
+#num1 {
+	color: rgb(243, 28, 115);
+}
+#num2 {
+	color: rgb(255, 141, 26);
+}
+#num3 {
+	color: rgb(53, 197, 200);
+}
+#num4 {
+	color: rgb(169, 185, 203);
+}
+.txt {
+	width: 25%; font-family: "PingFang SC","Helvetica Neue"; float: left; display: flex; justify-content: center; align-items: center;
+}
+.txt h2 {
+	margin: 0px;
+}
+#c2 {
+	left: 30%; top: 33%; width: 40%; height: 64%; position: absolute;
+}
+#l1 {
+	left: 0px; top: 10%; width: 30%; height: 44%; position: absolute;
+}
+#l2 {
+	left: 0px; top: 55%; width: 30%; height: 44%; position: absolute;
+}
+#r1 {
+	top: 10%; width: 30%; height: 45%; right: 0px; position: absolute;
+}
+#r2 {
+	top: 55%; width: 30%; height: 45%; right: 0px; color: white; position: absolute;
+}
+@media screen and (orientation:portrait)
+{
+html {
+	width: 100vmin;
+}
+body {
+	width: 100vmin;
+}
+#gyroContain {
+	transform-origin: left top; height: 100vmin; transform: rotate(90deg) translate(0px, -100vmin);
+}
+}
+@media screen and (orientation:landscape)
+{
+html {
+	height: 100vmin;
+}
+body {
+	height: 100vmin;
+}
+#gyroContain {
+	height: 100vmin;
+}
+}

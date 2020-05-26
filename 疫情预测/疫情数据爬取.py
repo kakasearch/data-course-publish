@@ -155,7 +155,22 @@ class spider_baiduindex(object):
 			decrypt_data =js_handler(uniq_id, data_dict.get(key).get("data"))
 			result.append({key: decrypt_data})
 		return result
-
+def bi_data(path):
+	headers={
+	'Accept': '*/*',
+	'Accept-Encoding': 'gzip, deflate',
+	'Accept-Language': 'zh-CN,zh;q=0.9',
+	'Referer': 'http://aiiyx.cn:81/',
+	'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Mobile Safari/537.36',
+	'X-Requested-With': 'XMLHttpRequest'
+	}
+	files=['c1','l1','l2','r1','r2']
+	for file in files:
+		url='http://aiiyx.cn:81/'+file
+		r=requests.get(url,headers)
+		with open(path+file+'.json','w+',encoding='utf-8')as f:
+			f.write(r.text)
+			print(r.text)
 
 def spider_ncov(area_name='太原'):
 	with open('./19-ncov/163.com_area.json',encoding='utf-8')as f:

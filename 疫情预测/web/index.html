@@ -1,126 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <title>四川地区口罩短缺预测</title>
-    <!-- 引入 echarts.js -->
-    <script src="echarts.js"></script>
-	<script src="jquery.js"></script>
-	
+    <meta charset="UTF-8">
+    <title>疫情监控</title>
+    <link href="main.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/china.js"></script>
+    <script src="js/echarts-wordcloud.min.js"></script>
 </head>
+
 <body>
-    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width: 800px;height:600px;position:relative;margin-top:30px;margin-left: 25%;"></div>
-    <script type="text/javascript">
-		function getoptions(obj){
-			options=[]
-			for(var k = 0, pl = obj['date'].length; k<pl; k++ ){
-				day=obj['date'][k]
-				temp={
-			        title: {
-			        	 text: '四川地区口罩短缺预测 '+day,
-			        		        },
-			        		        tooltip: {
-			        		            trigger: 'item',
-			        		            formatter: function(p) {
-											
-													  let str = p.name + '<br/>' + (p.value=='1'?'缺乏':'充足')
-													  return  str
-													}
-			        		        },
-			        		        toolbox: {
-			        		            show: true,
-			        		            orient: 'vertical',
-			        		            left: 'right',
-			        		            top: 'center',
-			        		            feature: {
-			        		                dataView: {readOnly: false},
-			        		                restore: {},
-			        		                saveAsImage: {}
-			        		            }
-			        		        },
-			        		        visualMap: {
-			        		            min: 0,
-			        		            max: 1,
-			        		            text: ['短缺', '充足'],
-			        		            realtime: false,
-			        		            calculable: false,//true,
-			        		            inRange: {
-			        		                color: ['lightskyblue', 'yellow', 'orangered']
-			        		            }
-			        		        },
-				    series: [
-				        {type: 'map',
-						mapType: 'sc', // 自定义扩展图表类型
-					data: obj[day],
-						},
-				    ]
-				}
-				options.push(temp)
-			}
-			return options
-		}
-		////////////
-		function dataFormatter(obj) {
-		    for (var k = 0, pl = obj['date'].length; k<pl; k++ ) {
-				day=obj['date'][k]
-		        obj[day]=[];
-		        for (var i = 0, l = obj['citys'].length; i < l; i++) {
-					var pname=obj['citys'][i]
-		            obj[day][i] = {
-		                name: pname,
-		                value:obj["data"][pname][k],
-		            };
-		        }
-		    }
-		    return obj;
-			}
-			/////////////////
-		
-		futuredata=''
-		 $.ajax({
-		             type: "GET",
-		             url: "future.json",
-		             dataType: "json",
-		             success: function(data){
-						 futuredata=data
-						 console.log(data)
-						 
-						 futuredata= dataFormatter(futuredata)
-						 
-						 var myChart = echarts.init(document.getElementById('main'));
-						 myChart.showLoading();
-						 $.get('map/四川.json', function (geoJson) {
-						 
-						     myChart.hideLoading();
-						 
-						     echarts.registerMap('sc', geoJson);
-						 
-						     myChart.setOption(option = {
-						 		timeline: {
-						 		    axisType: 'category',
-						 		    // realtime: false,
-						 		    // loop: false,
-						 		    autoPlay: true,
-						 		    // currentIndex: 2,
-						 		    playInterval: 1000,
-						 		    // controlStyle: {
-						 		    //     position: 'left'
-						 		    // },
-						 		    data: futuredata['date'],
-						 		    label: {
-						 		        formatter : function(s) {
-						 		            return (new Date(s)).getMonth()+1+"-"+(new Date(s)).getDate();
-						 		        }
-						 		    }
-						 		},
-						 	options: getoptions(futuredata),
-						     });
-						 });
-					 },
-					 })
-		
-		
-    </script>
+    <div id="gyroContain">
+        <div id="header">
+            <div id="data"><a href="#">第一小组</a>&nbsp;|&nbsp;<a href="#">世界疫情实时追踪</a><br> 数据来源：<a href="http://cov.aiiyx.cn/">cov.aiiyx.cn</a></div>
+            <div id="tit"><span>19-ncov智能看板</span></div>
+            <div id="tim"></div>
+        </div>
+        <footer id="footer"></footer>
+        <div id="c1">
+            <div class="num" id="num1">
+                <h1></h1>
+            </div>
+            <div class="num" id="num2">
+                <h1></h1>
+            </div>
+            <div class="num" id="num3">
+                <h1></h1>
+            </div>
+            <div class="num" id="num4">
+                <h1></h1>
+            </div>
+            <div style="clear:both"></div>
+            <div class="txt">
+                <h2></h2>
+            </div>
+            <div class="txt">
+                <h2></h2>
+            </div>
+            <div class="txt">
+                <h2></h2>
+            </div>
+            <div class="txt">
+                <h2></h2>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div id="c2"></div>
+        <div id="l1"></div>
+        <div id="l2"></div>
+        <div id="r1"></div>
+        <div id="r2"></div>
+    </div>
+    <script src="js/ec_center.js"></script>
+    <script src="js/ec_left1.js"></script>
+    <script src="js/ec_left2.js"></script>
+    <script src="js/ec_right1.js"></script>
+    <script src="js/ec_right2.js"></script>
+    <script src="js/controller.js"></script>
 </body>
+
 </html>

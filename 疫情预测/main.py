@@ -17,6 +17,7 @@ print('百度指数爬取开始，一周更新一次cookie')
 print('疫情爬取开始')	
 for city in citys:
 	疫情数据爬取.spider_ncov(city)
+疫情数据爬取.bi_data('web/')
 print('###########四川省数据全部爬取完毕###########')
 
 
