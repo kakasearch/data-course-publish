@@ -9,7 +9,7 @@ import time
 citys=["成都","广安","内江","遂宁","南充","德阳","达州","攀枝花","自贡","泸州", "巴中", "眉山", "绵阳", "宜宾", "甘孜州", "资阳", "雅安", "广元", "乐山", "凉山州", "阿坝州"]
 
 with open('./run_log.txt','a+',encoding='utf-8')as f:
-	f.write(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),'\t开始跟新数据\n')
+	f.write(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))+'\t开始跟新数据\n')
 ################################
 import 疫情数据爬取
 ##spider
@@ -25,7 +25,7 @@ try:
 	print('###########四川省数据全部爬取完毕###########')
 except:
 	with open('./run_log.txt','a+',encoding='utf-8')as f:
-	f.write(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),'\tERROR!!!请更新cookie!!!!\n')
+			f.write(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))+'\tERROR!!!请更新cookie!!!!\n')
 	exit()
 
 ###########################
@@ -67,4 +67,4 @@ with open('./web/future.json','w+',encoding='utf-8')as f:
 	f.write(str(json.dumps(future)).encode('utf-8').decode('unicode_escape'))
 print('网站数据跟新完毕')
 with open('./run_log.txt','a+',encoding='utf-8')as f:
-	f.write(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),'\t数据跟新成功\n')
+	f.write(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))+'\t数据跟新成功\n')
