@@ -68,8 +68,8 @@ def main(pkey):
 	# print(data)
   
 obj = []
-keys = ['熔喷布',]			#'医疗器械','聚丙烯',！！'医疗'
-for pkey in range(1):
+keys = ['熔喷布','医疗器械','聚丙烯']			#'医疗器械','聚丙烯',！！'医疗'
+for pkey in range(len(keys)):
 	x = threading.Thread(target = main,args = (keys[pkey],))
 	x.start()
 	obj.append(x)

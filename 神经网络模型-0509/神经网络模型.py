@@ -1,8 +1,4 @@
 #coding=utf-8
-'''
-Created on 2017-12-6
-
-'''
 
 from sklearn.neural_network import MLPClassifier
 #from sklearn.datasets import fetch_mldata
@@ -14,9 +10,6 @@ from sklearn.externals import joblib
 
 
 # 加载数据
-# mnist = fetch_mldata("MNIST original")
-# with gzip.open("D:\\xxx\\mnist.pkl.gz") as fp:
-#     training_data,valid_data,test_data = pickle.load(fp)
 def getdata(name):
 	with open(name,encoding='utf-8')as f:
 		items=f.readlines()

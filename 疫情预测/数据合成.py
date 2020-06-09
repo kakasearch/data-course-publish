@@ -26,7 +26,6 @@ def zipdata(area_name):
 		csv_str= fixed+','+ncov[i]+","+index[i]
 		csv.append(csv_str)
 	csv='\n'.join(csv)
-	print('正在写入',area_name)
 	with open('./predict/'+area_name+'.csv','w+',encoding='utf-8')as f:
 		f.write(csv)
 
